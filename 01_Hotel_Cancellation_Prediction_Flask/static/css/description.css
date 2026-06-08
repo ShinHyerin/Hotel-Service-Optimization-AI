@@ -1,0 +1,124 @@
+/* --- Description 섹션 전체 --- */
+.description-section {
+    background-color: #FCFBFA;
+    padding: 140px 0 100px 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+/* 상단 제목 */
+.desc-header {
+    text-align: center;
+    margin-bottom: 80px; /* 대시보드와 여백 확보 */
+}
+
+.desc-header h2 {
+    font-family: 'Times New Roman', serif;
+    font-size: 2.6rem;
+    color: #1a1a1a;
+    margin-bottom: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase; /* 대문자 변환으로 고급화 */
+}
+
+.desc-header p {
+    font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+    color: #666;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+}
+
+/* ⭐ [핵심 변경] 가로 3열 배치를 위한 컨테이너 정렬 */
+.desc-container {
+    max-width: 1200px; /* 가로로 넓게 펼쳐지도록 확장 */
+    width: 100%;
+    display: flex;
+    flex-direction: row; /* 가로 나열 */
+    justify-content: center;
+    gap: 40px; /* 카드와 카드 사이 여백 */
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+/* 개별 카드 아이템 (위에서 아래로 떨어지는 구조) */
+.desc-item {
+    flex: 1; /* 3개 카드가 완벽하게 균등 분할 크기 가짐 */
+    display: flex;
+    flex-direction: column; /* 이미지가 위, 텍스트가 아래 */
+    align-items: flex-start; /* 텍스트 시작점 왼쪽 정렬 */
+    background: transparent;
+    box-sizing: border-box;
+}
+
+/* 사진 스타일 (사진 속 완벽한 정방형 크롭 및 라운드 제거) */
+.desc-image {
+    width: 100%;
+    margin-bottom: 24px; /* 이미지와 아래 타이틀 사이 간격 */
+    overflow: hidden;
+}
+
+.desc-image img {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* 완벽한 1:1 정방형 비율 강제 */
+    object-fit: cover;
+    border-radius: 0px; /* 사진 속 테마에 맞춰 라운드 제거, 칼마감 */
+    transition: transform 0.5s ease;
+}
+
+/* 이미지 호버 시 부드럽게 확대되는 럭셔리 효과 추가 */
+.desc-item:hover .desc-image img {
+    transform: scale(1.03);
+}
+
+/* 텍스트 구역 */
+.desc-text {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* 카드 대제목 */
+.desc-text h3 {
+    font-family: 'Times New Roman', serif;
+    font-size: 1.15rem; /* 사진 비율에 맞춘 세련된 크기 */
+    color: #1a1a1a;
+    margin: 0 0 12px 0;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    text-transform: uppercase; /* 사진처럼 영문 대문자 처리 */
+}
+
+/* 카드 본문 설명 */
+.desc-text p {
+    font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+    font-size: 0.88rem;
+    color: #555555;
+    line-height: 1.6;
+    margin: 0 0 20px 0; /* 본문과 아래 버튼 사이 여백 */
+    letter-spacing: 0.3px;
+}
+
+/* 사진 속 하단 미니멀 EXPLORE 버튼 */
+/*
+.desc-btn {
+    font-family: 'Times New Roman', serif;
+    font-size: 0.78rem;
+    color: #1a1a1a;
+    text-decoration: none;
+    font-weight: bold;
+    letter-spacing: 2px;
+    border-bottom: 1px solid #1a1a1a;
+    padding-bottom: 2px;
+    transition: color 0.3s, border-color 0.3s;
+}
+
+.desc-btn:hover {
+    color: #888888;
+    border-color: #888888;
+}
+*/

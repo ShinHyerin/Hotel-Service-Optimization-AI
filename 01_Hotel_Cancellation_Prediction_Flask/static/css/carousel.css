@@ -1,0 +1,226 @@
+/* --- Carousel 섹션 전체 풀페이지 프레임 (100vh 완벽 통제) --- */
+.carousel-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column; /* 위아래로 배치 */
+    overflow: hidden;
+    user-select: none;
+    background-color: #ffffff;
+}
+
+/* 상단 75% 이미지 슬라이드 구역 */
+.carousel-slider-zone {
+    position: relative;
+    width: 100%;
+    height: 75vh; /* 화면의 75%만큼 차지 */
+    overflow: hidden;
+}
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.carousel-item {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity 1.2s ease,
+        visibility 1.2s ease;
+
+    z-index: 1;
+}
+
+.carousel-item.active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 2;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    display: block;
+}
+
+/* 어두운 오버레이 처리 */
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.2) 0%,
+        rgba(0,0,0,0.3) 60%,
+        rgba(0,0,0,0.45) 100%
+    );
+}
+
+/* 상단 이미지 영역 내부의 텍스트 캡션 센터링 */
+/* 캐러셀 캡션 컨테이너 */
+.carousel-caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    width: 90%;
+    max-width: 1100px;
+    text-align: center;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 1. 상단 서브 카피 스타일 */
+.carousel-caption .sub-title {
+    font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+    font-size: clamp(0.9rem, 1.4vw, 1.2rem); /* 부드러운 반응형 크기 */
+    font-weight: 400;
+    letter-spacing: 0.15em; /* 자간을 넓혀 고급스러운 무드 연출 */
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 16px; /* 메인 타이틀과의 간격 */
+
+    /* 텍스트 가독성을 위한 미세한 섀도우 */
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+
+    /* 애니메이션 초기 상태 */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+/* 2. 메인 타이틀 스타일 */
+.carousel-caption .main-title {
+    font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+    font-size: clamp(1.8rem, 3.5vw, 3.4rem); /* 가독성을 위해 최대 크기 살짝 키움 */
+    line-height: 1.45;
+    font-weight: 700; /* 조금 더 굵게 변경하여 눈에 띄게 설정 */
+    letter-spacing: -0.02em;
+    margin: 0;
+
+    /* 밝은 배경에서도 글씨가 묻히지 않도록 은은한 그림자 추가 */
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.2);
+
+    /* 애니메이션 초기 상태 */
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.9s ease 0.15s, transform 0.9s ease 0.15s; /* 서브카피보다 살짝 늦게 나오도록 지연(delay) 추가 */
+}
+
+/* 3. 활성화(Active) 상태 시 애니메이션 작동 */
+.carousel-item.active .carousel-caption .sub-title,
+.carousel-item.active .carousel-caption .main-title {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* --- [핵심] 하단 25% 하이엔드 무빙 프리미엄 설명 구역 --- */
+.carousel-static-bottom {
+    width: 100%;
+    height: 25vh; /* 화면의 25% 고정 */
+    background-color: #ffffff;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    z-index: 20;
+}
+
+.static-content-inner {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 80px;
+    display: flex;
+    justify-content: space-between; /* 설명글과 우측 인디케이터 정렬 균형 */
+    align-items: center;
+}
+
+.static-text-box {
+    text-align: left;
+    max-width: 750px;
+}
+
+/* 하단 브랜드 고정 메인 타이틀 */
+.static-brand-title {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #1a1a1a;
+    letter-spacing: 2px;
+    margin: 0 0 12px 0;
+    text-transform: uppercase;
+}
+
+/* 하단 세부 고정 설명 문구 */
+.static-brand-desc {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: #555555;
+    margin: 0;
+}
+
+
+/* --- 인디케이터 하단 내장형 리디자인 --- */
+/* --- [수정] 이미지 영역 내부 중앙 하단으로 정렬된 인디케이터 스타일 --- */
+.carousel-indicators {
+    position: absolute;
+    left: 50%;
+    bottom: 30px; /* 상단 75vh 이미지 영역의 맨 아래 바닥에서 30px 띄움 */
+    transform: translateX(-50%);
+    z-index: 20;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 28px;
+    border-radius: 999px;
+
+    /* 어두운 사진 위에서 고급스럽게 은은함을 줄 수 있는 블러 처리된 화이트 캡슐 */
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* 활성화된 슬라이더 바 (화이트 모던) */
+.indicator-bar {
+    width: 48px;
+    height: 2px;
+    border-radius: 99px;
+    background: rgba(255, 255, 255, 0.95);
+}
+
+/* 비활성화된 슬라이더 도트 (반투명 화이트) */
+.indicator-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.35);
+    cursor: pointer;
+    transition: background 0.35s ease, transform 0.2s ease;
+}
+
+.indicator-dot:hover {
+    background: rgba(255, 255, 255, 0.7);
+    transform: scale(1.2);
+}

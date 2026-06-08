@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/carousel.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/description.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/how.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/feature.css') }}">
+{% endblock %}
+
+{% block content %}
+<nav class="side-nav">
+    <div class="nav-line">
+        <div class="nav-indicator"></div>
+    </div>
+
+    <ul class="nav-menu">
+        <li class="nav-item active"><a href="#">HOME</a></li>
+        <li class="nav-item"><a href="#">Why Prediction Matters</a></li>
+        <li class="nav-item"><a href="#">HOW IT WORKS</a></li>
+        <li class="nav-item"><a href="#">KEY FEATURES</a></li>
+    </ul>
+</nav>
+
+<div class="main-scroll-container" id="main-scroll-container">
+
+    <section id="section-home" class="main-section">
+        {% include 'components/carousel.html' %}
+    </section>
+
+    <section id="section-why" class="main-section">
+        {% include 'components/description.html' %}
+    </section>
+
+    <section id="section-how" class="main-section">
+        {% include 'components/how.html' %}
+    </section>
+
+    <section id="section-features" class="main-section">
+        <div class="features-wrapper">
+            {% include 'components/feature.html' %}
+        </div>
+
+        {% include 'components/footer.html' %}
+    </section>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/carousel.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/feature.js') }}"></script>
+{% endblock %}

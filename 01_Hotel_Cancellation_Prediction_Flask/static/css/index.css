@@ -1,0 +1,140 @@
+/* ==========================================
+   [FULL-PAGE SCROLL LAYOUT] 화면 고정 및 스크롤 감춤
+   ========================================== */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* 브라우저 자체 스크롤바 강제 제거 */
+}
+
+body {
+    overflow-x: hidden;
+}
+
+/* 전체 섹션을 들고 통째로 Y축 이동할 컨테이너 슬라이드 트랙 */
+.main-scroll-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform: translateY(0);
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); /* 고급스러운 스무스 스크롤 가속도 */
+    will-change: transform;
+}
+
+/* 각 섹션 높이 화면에 고정 */
+.main-section {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* ==========================================
+   [VERTICAL SIDE NAVIGATION] 가이드 선 왼쪽 배치 및 중앙 정렬 보정
+   ========================================== */
+.side-nav {
+    position: fixed;
+    left: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: row; /* 선이 무조건 글자 왼쪽에 위치 */
+    gap: 20px; /* 선과 글자 사이의 간격을 미세하게 넓혀 시각적 답답함 해소 */
+    z-index: 2000;
+}
+
+/* 세로 가이드 선 생성 */
+.nav-line {
+    position: relative;
+    width: 2px;
+    height: 240px; /* 60px * 4칸 = 240px 규격 완벽 고정 */
+    background: rgba(255, 255, 255, 0.2);
+    transition: background 0.3s;
+}
+
+/* 현재 위치를 가리키는 바늘 인디케이터 (index.js의 itemHeight: 60과 싱크 연동) */
+.nav-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px; /* 정렬 뒤틀림을 막기 위해 40px -> 60px로 인디케이터 영역 확장 */
+    background: #ffffff;
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* 메뉴 리스트 (space-between을 버리고 flex-start 배열로 수치 일치화) */
+.nav-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* 칸별로 딱딱 떨어지도록 변경 */
+    height: 240px;
+}
+
+/* 각 아이템의 높이를 60px로 고정하여 인디케이터가 이동하는 보폭과 완벽히 동기화 */
+.nav-item {
+    height: 60px;
+    display: flex;
+    align-items: center; /* 60px 높이 안에서 글자가 정중앙에 오도록 수직 정렬 */
+    box-sizing: border-box;
+}
+
+.nav-item a {
+    text-decoration: none;
+    font-family: 'Times New Roman', serif;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    font-weight: bold;
+    opacity: 0;
+    transform: translateX(10px); /* 선 오른쪽에서 부드럽게 밀려나오도록 타겟 수정 */
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    line-height: 1; /* 글자 자체 폰트 마진으로 인한 처짐 방지 */
+}
+
+/* 활성화 상태 글자 표시 */
+.nav-item.active a {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* 호버 시 선 오른쪽에 전체 글자 노출 */
+.side-nav:hover .nav-item a {
+    opacity: 0.5;
+    transform: translateX(0);
+}
+
+.side-nav:hover .nav-item a:hover {
+    opacity: 1;
+}
+
+/* ==========================================
+   [DYNAMIC THEME COLORS] 방문 링크 보라색 방지 및 테마 강제 고정
+   ========================================== */
+
+/* 1. 어두운 배경 상태 (Carousel, Feature) -> 무조건 흰색 계열 */
+.side-nav.dark-nav .nav-line { background: rgba(255, 255, 255, 0.2); }
+.side-nav.dark-nav:hover .nav-line { background: rgba(255, 255, 255, 0.4); }
+.side-nav.dark-nav .nav-indicator { background: #ffffff; }
+
+/* 방문 여부와 상관없이 무조건 흰색 고정 */
+.side-nav.dark-nav .nav-item a,
+.side-nav.dark-nav .nav-item a:visited {
+    color: #ffffff !important;
+}
+
+
+/* 2. 밝은 배경 상태 (Why, How) -> 무조건 검은색 계열 */
+.side-nav.light-nav .nav-line { background: rgba(0, 0, 0, 0.15); }
+.side-nav.light-nav:hover .nav-line { background: rgba(0, 0, 0, 0.35); }
+.side-nav.light-nav .nav-indicator { background: #1a1a1a; }
+
+/* 방문 여부와 상관없이 무조건 검은색(#1a1a1a) 고정 */
+.side-nav.light-nav .nav-item a,
+.side-nav.light-nav .nav-item a:visited {
+    color: #1a1a1a !important;
+}

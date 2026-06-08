@@ -1,0 +1,486 @@
+/* ===================================================
+   [헤더 영역] 상단 반투명 레이어 고정
+   =================================================== */
+header {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    z-index: 3000;
+}
+
+header .main-title { color: #ffffff !important; }
+header .nav-search { color: rgba(255, 255, 255, 0.7) !important; }
+header .nav-search:hover { color: #ffffff !important; }
+header .nav-predict-btn {
+    background-color: transparent !important;
+    border: 1px solid #ffffff !important;
+    color: #ffffff !important;
+}
+header .nav-predict-btn:hover {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+}
+
+body {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.predict-page {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #fcfbfa;
+    padding-top: 0 !important;
+    padding-bottom: 80px;
+    box-sizing: border-box;
+}
+
+/* ===================================================
+   [상단 배너 영역]
+   =================================================== */
+.predict-top-banner {
+    position: relative;
+    width: 100%;
+    height: 480px;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden;
+}
+
+.predict-top-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.banner-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner-text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.banner-subtitle {
+    font-family: 'Times New Roman', serif;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 5px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+.serif-title {
+    font-family: 'Times New Roman', 'Noto Sans KR', serif;
+    font-size: 3rem;
+    color: #ffffff;
+    letter-spacing: 3px;
+    font-weight: 400;
+    margin: 0;
+}
+
+.serif-title::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.4);
+    margin: 0 auto 20px auto;
+}
+
+/* ===================================================
+   [대시보드 메인 레이아웃 구역]
+   =================================================== */
+.predict-bottom-container {
+    display: flex;
+    max-width: 1300px;
+    margin: -60px auto 0;
+    position: relative;
+    z-index: 50;
+    gap: 35px;
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+/* 💡 [좌측 영역 안정화] 고정 배치 시 깨짐 방지를 위해 width 명시적 부여 */
+.analysis-result-area {
+    flex: 4;
+    min-width: 400px; /* 💡 노트북 화면을 고려해 최소 너비를 약간 줄여 가로 폭 확보 */
+    max-width: 500px; /* 💡 무한정 커지지 않도록 최대 너비 락(Lock) 설정 */
+    box-sizing: border-box;
+}
+
+.result-card {
+    background: #ffffff;
+    padding: 40px 24px; /* 💡 좌우 패딩을 살짝 줄여서 내부 차트가 들어갈 공간을 확보 */
+    border: 1px solid #1a1a1a;
+    border-radius: 4px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.06);
+    text-align: center;
+
+    position: sticky;
+    top: 120px;
+    box-sizing: border-box;
+    overflow: hidden; /* 💡 혹시라도 자식 요소가 카드를 넘어가면 강제로 숨김 처리 */
+}
+
+.result-card h3 {
+    font-family: 'Times New Roman', serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: #1a1a1a;
+    margin: 0 0 30px 0;
+    border-bottom: 1px solid #eaeaea;
+    padding-bottom: 15px;
+}
+
+#chart-container {
+    width: 100%;
+    margin: 0 auto 25px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dual-chart-wrapper {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    width: 100%; /* 💡 부모 너비인 100%를 절대 넘지 못하도록 고정 */
+    box-sizing: border-box;
+}
+
+.chart-box {
+    flex: 1;
+    min-width: 0; /* 💡 플렉스 자식 요소가 부모 박스를 깨고 삐져나가는 현상을 원천 차단하는 핵심 속성 */
+    text-align: center;
+}
+
+.chart-box span {
+    display: block;
+    font-size: 11px;
+    font-weight: bold;
+    color: #666;
+    margin-bottom: 8px;
+    white-space: nowrap; /* 💡 글자가 좁아서 줄바꿈되는 현상 방지 */
+}
+
+/* 💡 차트가 그려질 컨테이너의 크기를 유연하게 제한 */
+.chart-box div[id$="-chart-container"] {
+    position: relative;
+    height: 180px; /* 💡 노트북 환경에 맞춰 높이를 살짝 스케일 다운 */
+    width: 100%;
+}
+
+/* 리포트 하단 수치 가이드라인 정렬 */
+.status-info {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    border-top: 1px solid #eee;
+    padding-top: 25px;
+}
+
+.status-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 0.9rem;
+}
+
+.status-label {
+    color: #777777;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.status-value {
+    color: #1a1a1a;
+    font-weight: bold;
+    font-size: 1.05rem;
+}
+
+.status-value.highlight {
+    color: #c9a063;
+    letter-spacing: 0.5px;
+}
+
+.chart-guide-text {
+    margin-top: 12px;
+    font-size: 0.82rem;
+    color: #888;
+    letter-spacing: 0.3px;
+    font-family: 'Pretendard', sans-serif;
+}
+
+/* ===================================================
+   [우측 파라미터 입력 폼 구역]
+   =================================================== */
+.registration-form-area {
+    flex: 6;
+}
+
+.hotel-reg-card {
+    background: #ffffff;
+    padding: 45px 40px;
+    border: 1px solid #1a1a1a;
+    border-radius: 4px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.06);
+}
+
+.input-row {
+    display: flex;
+    gap: 25px;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.input-row.split-2-row .input-group {
+    flex: 1;
+}
+
+.input-row.full-width-row .input-group {
+    flex: 1;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.group-title {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+/* --- 공통 인풋 및 셀렉트 박스 테마 스타일 --- */
+.custom-input,
+.custom-select {
+    width: 100%;
+    height: 48px;
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    padding: 0 15px;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 0.9rem;
+    color: #333333;
+    outline: none;
+    background-color: #ffffff;
+    transition: border-color 0.2s ease;
+    box-sizing: border-box;
+}
+
+.custom-select {
+    cursor: pointer;
+}
+
+.custom-input:focus,
+.custom-select:focus {
+    border-color: #1a1a1a;
+}
+
+/* --- 커스텀 라디오 버튼 모듈 --- */
+.radio-grid-box {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.radio-grid-box .custom-radio-label {
+    flex: 1;
+    height: 48px;
+    position: relative;
+    cursor: pointer;
+}
+
+.custom-radio-label input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0; height: 0;
+}
+
+.custom-radio-label span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 0.88rem;
+    color: #666666;
+    background: #ffffff;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-sizing: border-box;
+}
+
+.custom-radio-label:hover span {
+    border-color: #999;
+    color: #1a1a1a;
+}
+
+.custom-radio-label input[type="radio"]:checked + span {
+    border-color: #1a1a1a;
+    background: #1a1a1a;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* --- 실시간 인사이트 리포트 컨테이너 --- */
+.insight-report-container {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    text-align: left;
+}
+
+.insight-box {
+    background: #fdfdfd;
+    border: 1px solid #eaeaea;
+    border-radius: 2px;
+    padding: 18px 20px;
+    transition: all 0.3s ease;
+}
+
+.insight-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.insight-dot {
+    width: 5px;
+    height: 5px;
+    background-color: #1a1a1a;
+    border-radius: 50%;
+}
+
+.insight-header h4 {
+    font-family: 'Times New Roman', serif;
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #888888;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.insight-box p {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: #333333;
+    margin: 0;
+}
+
+/* 색상 분기 보더 효과 */
+.insight-box.border-stable { border-left: 3px solid #5F7C65; background-color: #F3F5F1; }
+.insight-box.border-attention { border-left: 3px solid #A88B5E; background-color: #F8F5EF; }
+.insight-box.border-risk { border-left: 3px solid #A15F5A; background-color: #F7F2F1; }
+
+/* --- 텍스트 에어리어 스타일 및 기타 설정 --- */
+.custom-textarea {
+    width: 100%;
+    min-height: 62px; /* 디자인 조화성 맞춤 */
+    resize: none;
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    padding: 12px 15px;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+    box-sizing: border-box;
+    background-color: #ffffff;
+}
+
+.custom-textarea:focus {
+    border-color: #1a1a1a;
+}
+
+.form-section-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #222;
+    margin-top: 10px;
+    margin-bottom: 14px;
+    letter-spacing: 0.5px;
+}
+
+.form-divider {
+    width: 100%;
+    height: 1px;
+    background: #dcdcdc;
+    margin-bottom: 28px;
+}
+
+/* --- 하단 액션 버튼 그룹 --- */
+.form-action-row {
+    width: 100%;
+    margin-top: 40px;
+    display: flex;
+    gap: 15px;
+}
+
+.reset-predict-btn,
+.reserve-predict-btn {
+    height: 54px;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 0.93rem;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-sizing: border-box;
+}
+
+.reset-predict-btn {
+    flex: 4.5;
+    background: #ffffff;
+    color: #555555;
+    border: 1px solid #e0e0e0;
+}
+
+.reset-predict-btn:hover {
+    background: #f5f5f5;
+    color: #1a1a1a;
+    border-color: #1a1a1a;
+}
+
+.reserve-predict-btn {
+    flex: 5.5;
+    background: #1a1a1a;
+    color: #ffffff;
+    border: 1px solid #1a1a1a;
+}
+
+.reserve-predict-btn:hover {
+    background: #ffffff;
+    color: #1a1a1a;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}

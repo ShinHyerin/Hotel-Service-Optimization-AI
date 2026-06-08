@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="생성형 AI 기반 호텔 예약 취소율 예측 서비스">
+
+    <title>
+        {% block title %}
+        생성형 AI 기반 호텔 예약 취소율 예측 서비스
+        {% endblock %}
+    </title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+
+    {% block head %}{% endblock %}
+</head>
+
+<body>
+
+    {% include 'components/header.html' %}
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    {% include 'components/footer.html' %}
+
+    {% block scripts %}{% endblock %}
+
+</body>
+
+</html>

@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/search.css') }}">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+
+{% block content %}
+<section class="search-page">
+
+    <div class="predict-top-banner">
+        <img src="{{ url_for('static', filename='images/predict_1.jpg') }}" alt="Banner">
+        <div class="banner-overlay">
+            <div class="banner-text-container">
+                <span class="banner-subtitle">User Search</span>
+                <h1 class="serif-title">예약 정보 찾기</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="search-main-wrapper">
+
+        <section class="statistics-section">
+            <div class="statistics-unified-card">
+                <h2 class="statistics-title">실시간 예약 취소율 현황</h2>
+
+                <div class="statistics-chart-wrapper">
+
+                    <div class="chart-inner-item">
+                        <h4>🏨 호텔 객실</h4>
+                        <div class="chart-circle-wrapper">
+                            <canvas id="resortChart"></canvas>
+                        </div>
+                        <p class="chart-percent">
+                            <span id="resortRateText">0</span>%
+                        </p>
+                    </div>
+
+                    <div class="chart-inner-item">
+                        <h4>🏢 세미나실</h4>
+                        <div class="chart-circle-wrapper">
+                            <canvas id="cityChart"></canvas>
+                        </div>
+                        <p class="chart-percent">
+                            <span id="cityRateText">0</span>%
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <div class="search-container">
+            <form id="search-form" class="search-card">
+                <div class="input-row full-width-row">
+                    <div class="input-group">
+                        <label class="group-title">고객 이름</label>
+                        <input type="text"
+                           name="customer_name"
+                           class="custom-input"
+                           maxlength="20"
+                           placeholder="이름 입력"
+                           value="홍길동"
+                           required>
+                    </div>
+                </div>
+
+                <div class="input-row birth-row">
+                    <div class="input-group birth-year-group">
+                        <label class="group-title">출생 연도</label>
+                        <select name="birth_year" id="birth_year" class="custom-select birth-select" required>
+                            <option value="">연도 선택</option>
+                            {% for year in range(2007, 1919, -1) %}
+                            <option value="{{ year }}"
+                                {% if year == 2006 %}selected{% endif %}>
+                                {{ year }}년
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="input-group birth-month-group">
+                        <label class="group-title">월</label>
+                        <select name="birth_month" id="birth_month" class="custom-select birth-select" required>
+                            <option value="">월</option>
+                            {% for month in range(1, 13) %}
+                            <option value="{{ month }}"
+                                {% if month == 1 %}selected{% endif %}>
+                                {{ month }}월
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="input-group birth-day-group">
+                        <label class="group-title">일</label>
+                        <select name="birth_day" id="birth_day" class="custom-select birth-select" required>
+                            <option value="">일</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="input-row full-width-row">
+                    <div class="input-group">
+                        <label class="group-title">전화번호</label>
+                        <input type="tel"
+                           name="phone"
+                           class="custom-input"
+                           placeholder="'-' 없이 숫자만 입력"
+                           pattern="[0-9]+"
+                           maxlength="11"
+                           value="01012345678"
+                           required>
+                    </div>
+                </div>
+
+                <div class="form-action-row">
+                    <button type="button" id="btn-search" class="search-btn">
+                        예약정보조회
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+    <div id="search-result-area" class="history-page" style="display: none; margin-top: 50px;">
+        <div class="history-top" style="text-align: center; margin-bottom: 30px;">
+            <h2 style="font-family: 'Pretendard', sans-serif; font-size: 1.5rem; color: #1a1a1a;">
+                <span id="result-user-name"></span>님의 예약 내역
+            </h2>
+        </div>
+        <div id="booking-list-container" class="history-container">
+            </div>
+    </div>
+
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/search.js') }}"></script>
+{% endblock %}

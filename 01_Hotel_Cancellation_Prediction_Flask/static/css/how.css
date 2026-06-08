@@ -1,0 +1,78 @@
+/* --- How It Works 섹션 --- */
+.how-section {
+    width: 100%;
+    height: 100vh; /* 한 페이지 꽉 차게 */
+    background-color: #ffffff;
+    overflow: hidden;
+}
+
+.how-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+/* 이미지 영역 (비율 4) */
+.how-image-area {
+    flex: 4;
+    height: 100%;
+}
+
+.how-image-area img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 이미지가 찌그러지지 않게 꽉 채움 */
+    display: block;
+}
+
+/* 설명 영역 (비율 6) */
+.how-content-area {
+    flex: 6;
+    height: 100%;
+    display: flex;
+    align-items: center; /* 세로 중앙 */
+    justify-content: center; /* 가로 중앙 */
+    background-color: #fff;
+}
+
+.how-text-wrapper {
+    max-width: 500px;
+    padding: 0 50px;
+}
+
+.how-title {
+    font-family: 'Times New Roman', serif;
+    font-size: 3rem;
+    color: #1a1a1a;
+    margin-bottom: 50px;
+}
+
+/* 리스트 스타일 (번호 매기기) */
+.how-list {
+    list-style: none;
+    padding: 0;
+}
+
+.how-list li {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 35px;
+}
+
+/* 번호 스타일 */
+.num {
+    font-family: 'Times New Roman', serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #c5a059; /* 호텔 느낌의 골드톤 포인트 (취향껏 수정) */
+    margin-right: 25px;
+    padding-top: 3px;
+    border-bottom: 1px solid #c5a059;
+}
+
+.how-list p {
+    font-size: 1.1rem;
+    color: #444;
+    line-height: 1.6;
+    margin: 0;
+}

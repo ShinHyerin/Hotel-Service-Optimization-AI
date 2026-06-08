@@ -1,0 +1,161 @@
+/* --- Feature 섹션 전체 레이아웃 --- */
+.feature-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* 양쪽 레이아웃 균형 배치 */
+    padding: 0 8% 0 14%; /* [수정] 왼쪽 패딩을 14%로 늘려 Features 글자를 오른쪽으로 이동 */
+    box-sizing: border-box;
+
+    /* [핵심 수정] 어떤 이미지 크기가 들어와도 16:9 비율 크기로 배경판을 강제 고정하여 들썩임 차단 */
+    background-size: 100% 100vh;
+    background-repeat: no-repeat;
+    background-position: center center;
+    transition: background-image 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    background-image: url('../images/feature_1.jpg');
+}
+
+/* 어두운 오버레이 (글자 가독성 확보) */
+.feature-section::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* 조금 더 분위기 있고 명확하게 가독성 상향 */
+    z-index: 1;
+}
+
+/* [위치 수정] 좌측 고정 텍스트 영역 */
+.feature-fixed-text {
+    position: relative;
+    color: white;
+    z-index: 2;
+    flex: 0 0 auto; /* 크기 고정 */
+}
+
+.serif-title {
+    font-family: 'Times New Roman', serif;
+    font-size: 4.2rem;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+.feature-desc {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+/* [위치 수정] 우측 카드 컨테이너 (오른쪽 짤림 방지 및 왼쪽으로 밀기) */
+.feature-card-container {
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    padding-right: 4%; /* [수정] 우측에 여백을 강제로 주어 카드를 안전하게 왼쪽으로 이동시킴 */
+    z-index: 2;
+    flex: 0 0 auto;
+}
+
+/* 우측 카드 디자인 (Off-white 호텔 프리미엄 톤) */
+.feature-card {
+    background: #f4f1ee;
+    width: 420px; /* 미세하게 컴팩트하게 조정 */
+    padding: 35px 30px;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.4);
+    border-radius: 4px; /* 사이트 전체 스퀘어 모던 톤 유지 */
+}
+
+/* 카드 내부 이미지 박스 비율 강제 고정 */
+.card-img-box {
+    width: 100%;
+    height: 280px;
+    overflow: hidden;
+    margin-bottom: 25px;
+    border-radius: 2px;
+}
+
+.card-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 카드 내부 이미지도 들썩이지 않고 비율 깨짐 없이 크롭 고정 */
+}
+
+/* 콘텐츠 영역 */
+.card-content {
+    text-align: center;
+    color: #2c3e50;
+}
+
+.card-content h3 {
+    font-family: 'Times New Roman', serif;
+    font-size: 2.1rem;
+    color: #1a1a1a;
+    margin-bottom: 6px;
+}
+
+.card-content h4 {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 0.85rem;
+    color: #8a8a8a;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.card-content p {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 0.95rem;
+    color: #4a4a4a;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    height: 50px; /* 텍스트 길이에 따른 카드 높이 들썩임 방지 유지 */
+}
+
+/* 컨트롤러 내비게이션 */
+.card-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+}
+
+.card-controls button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: #1a1a1a;
+    transition: transform 0.2s;
+}
+
+.card-controls button:hover {
+    transform: scale(1.2);
+}
+
+.card-controls button:disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+
+.indicator-dots {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: rgba(44, 62, 80, 0.2);
+    border-radius: 50%;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* 캡슐 모양 인디케이터 연동 */
+.dot.active {
+    background: #2c3e50;
+    width: 22px;
+    border-radius: 4px;
+}
