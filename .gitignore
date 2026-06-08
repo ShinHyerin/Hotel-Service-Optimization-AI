@@ -224,3 +224,16 @@ __marimo__/
 **/.venv/
 
 **/db_config.py
+
+# 파이썬 캐시 파일 제외
+**/__pycache__/
+*.pyc
+
+# 파이참(PyCharm) 설정 폴더 제외
+.idea/
+
+# VS Code 설정 폴더 제외
+.vscode/
+
+# 가상환경 폴더 제외
+**/venv/
