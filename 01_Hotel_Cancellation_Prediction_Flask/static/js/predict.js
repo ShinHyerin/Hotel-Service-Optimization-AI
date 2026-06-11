@@ -386,6 +386,7 @@ function updatePrediction() {
         const txtSolutionDesc = document.getElementById('insight-solution-desc');
 
         if (prob >= 60) {
+            txtPrediction.style.color = '#A15F5A';
 
             if (txtPrediction)
                 txtPrediction.innerText =
@@ -400,6 +401,7 @@ function updatePrediction() {
                 "예약 일정 및 조건을 다시 확인해보시는 것을 권장드립니다.";
 
         } else {
+            txtPrediction.style.color = '#c9a063';
 
             if (txtPrediction)
                 txtPrediction.innerText =

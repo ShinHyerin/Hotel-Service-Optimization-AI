@@ -29,12 +29,13 @@ def train_model():
 
     # 3. 💡 피처 선택 (ADR 제거, HOTEL 추가)
     selected_features = [
-        'HOTEL',  # 세미나실(City) vs 객실(Resort) 구분 핵심
+        'HOTEL',  # City Hotel vs Resort Hotel 구분 핵심
         'LEAD_TIME',
         'COUNTRY',
         'MARKET_SEGMENT',
         'PREVIOUS_CANCELLATIONS',
         'CUSTOMER_TYPE',
+        'ADR',
         'REQUIRED_CAR_PARKING_SPACES',
         'TOTAL_OF_SPECIAL_REQUESTS'
     ]
@@ -47,7 +48,7 @@ def train_model():
 
     # 5. 💡 인코딩 (HOTEL 포함)
     le_dict = {}
-    cat_cols = ['HOTEL', 'COUNTRY', 'MARKET_SEGMENT', 'CUSTOMER_TYPE']  # HOTEL 추가
+    cat_cols = ['HOTEL', 'COUNTRY', 'MARKET_SEGMENT', 'CUSTOMER_TYPE']
     for col in cat_cols:
         le = LabelEncoder()
         X_train[col] = le.fit_transform(X_train[col].astype(str))
@@ -84,7 +85,7 @@ def train_model():
         'Importance': model.feature_importances_
     }).sort_values(by='Importance', ascending=False)
 
-    print("\n📌 Feature Importance (ADR 제외 버전)")
+    print("\n📌 Feature Importance")
     print(importance_df)
 
     # 8. 파일 저장
@@ -94,7 +95,7 @@ def train_model():
     # 파일명은 그대로 유지하여 Flask 로직 호환성 유지
     joblib.dump(model, os.path.join(model_dir, 'hotel_model.pkl'))
     joblib.dump(le_dict, os.path.join(model_dir, 'label_encoders.pkl'))
-    print(f"\n✨ 통합 모델 저장 완료! (HOTEL 피처 포함 / ADR 피처 제외)")
+    print(f"\n✨ 통합 모델 저장 완료!")
 
 
 if __name__ == "__main__":

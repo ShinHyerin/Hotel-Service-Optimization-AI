@@ -173,15 +173,15 @@
 
                     <div class="input-row split-2-row">
                         <div class="input-group">
-                            <label class="group-title">예약 유형 선택</label>
+                            <label class="group-title">예약 호텔 선택</label>
                             <div class="radio-grid-box">
                                 <label class="custom-radio-label">
                                     <input type="radio" name="hotel_type" value="Resort Hotel" required checked>
-                                    <span>🏨 호텔 객실 이용</span>
+                                    <span>🏨 리조트 호텔</span>
                                 </label>
                                 <label class="custom-radio-label">
                                     <input type="radio" name="hotel_type" value="City Hotel">
-                                    <span>🏢 세미나실 대관</span>
+                                    <span>🏢 도시 속 호텔</span>
                                 </label>
                             </div>
                         </div>
@@ -200,6 +200,24 @@
 
                     <div class="input-row split-2-row">
                         <div class="input-group">
+                            <label class="group-title">1박 평균 요금</label>
+
+                            <select
+                                name="adr"
+                                id="adr"
+                                class="custom-select"
+                                required
+                            >
+                                <option value="under_10">10만원 미만</option>
+                                <option value="10_20" selected>10~20만원</option>
+                                <option value="20_30">20~30만원</option>
+                                <option value="30_40">30~40만원</option>
+                                <option value="over_40">40만원 초과</option>
+                            </select>
+                        </div>
+
+
+                        <div class="input-group">
                             <label class="group-title">고객 유형</label>
                             <select name="customer_type" id="customer_type" class="custom-select" required>
                                 <option value="">선택하세요</option>
@@ -210,21 +228,23 @@
                             </select>
                         </div>
 
+
+                    </div>
+
+                    <div class="input-row split-2-row">
                         <div class="input-group">
                             <label class="group-title">예약 경로</label>
                             <select name="market_segment" required class="custom-select">
                                 <option value="">선택하세요</option>
-                                <option value="Online TA">온라인 여행사(플랫폼)</option>
-                                <option value="Offline TA/TO">오프라인 대행사(에이전시)</option>
+                                <option value="Online TA">온라인 여행사 (플랫폼)</option>
+                                <option value="Offline TA/TO">오프라인 대행사 (에이전시)</option>
                                 <option value="Direct" selected>호텔 직접 예약</option>
                                 <option value="Groups">공동 단체 예약</option>
                                 <option value="Corporate">기업 제휴 예약</option>
                                 <option value="Other">기타 경로</option>
                             </select>
                         </div>
-                    </div>
 
-                    <div class="input-row split-2-row">
                         <div class="input-group">
                             <label class="group-title">차량 주차 공간 지원 필요성</label>
                             <div class="radio-grid-box text-options">
@@ -239,16 +259,17 @@
                             </div>
                         </div>
 
-                        <div class="input-group">
-                            <label class="group-title">추가 요청 사항 기재</label>
-                            <textarea
-                                name="special_requests"
-                                id="special_requests"
-                                class="custom-textarea"
-                                placeholder="세부 요구사항을 자유롭게 입력해 주세요."
-                                maxlength="300"
-                                style="height: 62px; resize: none;"></textarea>
-                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="group-title">추가 요청 사항 기재</label>
+                        <textarea
+                            name="special_requests"
+                            id="special_requests"
+                            class="custom-textarea"
+                            placeholder="세부 요구사항을 자유롭게 입력해 주세요."
+                            maxlength="300"
+                            style="height: 62px; resize: none;"></textarea>
                     </div>
 
                     <div class="form-action-row">

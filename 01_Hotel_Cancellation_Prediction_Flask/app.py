@@ -60,14 +60,26 @@ def api_predict():
         input_df = pd.DataFrame([data])
         input_df.columns = [col.upper() for col in input_df.columns]
 
-        # 공통 수치형 데이터 타입 강제 형변환 (ADR 항목은 완전 제외)
-        numeric_cols = ['LEAD_TIME', 'PREVIOUS_CANCELLATIONS',
+        # ADR 문자열 → 숫자 변환
+        adr_mapping = {
+            "under_10": 25,
+            "10_20": 75,
+            "20_30": 125,
+            "30_40": 175,
+            "over_40": 250
+        }
+
+        if 'ADR' in input_df.columns:
+            input_df['ADR'] = input_df['ADR'].map(adr_mapping)
+
+        # 공통 수치형 데이터 타입 강제 형변환
+        numeric_cols = ['LEAD_TIME', 'PREVIOUS_CANCELLATIONS', 'ADR',
                         'REQUIRED_CAR_PARKING_SPACES', 'TOTAL_OF_SPECIAL_REQUESTS']
         for col in numeric_cols:
             if col in input_df.columns:
                 input_df[col] = pd.to_numeric(input_df[col], errors='coerce').fillna(0)
 
-        # ADR이 빠진 7개의 순수 피처 리스트 고정
+
         selected_features = [
             'HOTEL',
             'LEAD_TIME',
@@ -75,6 +87,7 @@ def api_predict():
             'MARKET_SEGMENT',
             'PREVIOUS_CANCELLATIONS',
             'CUSTOMER_TYPE',
+            'ADR',
             'REQUIRED_CAR_PARKING_SPACES',
             'TOTAL_OF_SPECIAL_REQUESTS'
         ]
@@ -91,8 +104,14 @@ def api_predict():
                         input_df[col] = le.transform([val])[0]
 
             input_df = input_df[selected_features]
+
+            # print(input_df)
+
             prediction = hotel_model.predict(input_df)[0]
             probability = hotel_model.predict_proba(input_df)[0][1]
+
+            # print(prediction)
+            # print(probability)
 
         # 연산 결과 최종 리턴
         cancel_prob = float(probability)
@@ -133,13 +152,15 @@ def reserve():
                 PREVIOUS_CANCELLATIONS,
                 MARKET_SEGMENT,
                 CUSTOMER_TYPE,
+                ADR,
                 REQUIRED_CAR_PARKING_SPACES,
                 TOTAL_OF_SPECIAL_REQUESTS
-            ) VALUES (
+            )
+            VALUES (
                 :1, :2, :3, :4,
                 :5, :6, :7, :8,
                 :9, :10, :11, :12,
-                :13
+                :13, :14
             )
         """
 
@@ -155,6 +176,7 @@ def reserve():
             data.get('previous_cancellations'),
             data.get('market_segment'),
             data.get('customer_type'),
+            data.get('adr'),
             data.get('required_car_parking_spaces'),
             data.get('total_of_special_requests')
         )
@@ -290,6 +312,7 @@ def chart_data():
                 MARKET_SEGMENT,
                 PREVIOUS_CANCELLATIONS,
                 CUSTOMER_TYPE,
+                ADR,
                 REQUIRED_CAR_PARKING_SPACES,
                 TOTAL_OF_SPECIAL_REQUESTS
             FROM USER_BOOKINGS
@@ -313,6 +336,7 @@ def chart_data():
             'MARKET_SEGMENT',
             'PREVIOUS_CANCELLATIONS',
             'CUSTOMER_TYPE',
+            'ADR',
             'REQUIRED_CAR_PARKING_SPACES',
             'TOTAL_OF_SPECIAL_REQUESTS'
         ]
@@ -321,6 +345,7 @@ def chart_data():
         numeric_cols = [
             'LEAD_TIME',
             'PREVIOUS_CANCELLATIONS',
+            'ADR',
             'REQUIRED_CAR_PARKING_SPACES',
             'TOTAL_OF_SPECIAL_REQUESTS'
         ]

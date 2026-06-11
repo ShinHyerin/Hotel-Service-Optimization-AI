@@ -10,7 +10,7 @@ def load_hotel_to_oracle(csv_path):
     target_columns = [
         'hotel', 'lead_time', 'country',
         'market_segment', 'previous_cancellations',
-        'customer_type', 'required_car_parking_spaces',
+        'customer_type', 'adr', 'required_car_parking_spaces',
         'total_of_special_requests', 'is_canceled'
     ]
     df_final = df[target_columns].fillna({'country': 'Unknown'})
@@ -18,6 +18,8 @@ def load_hotel_to_oracle(csv_path):
     # 💡 오라클 변환 에러 방지: 정수형 컬럼들의 타입을 확실하게 int로 지정
     int_columns = ['lead_time', 'previous_cancellations', 'required_car_parking_spaces', 'total_of_special_requests',
                    'is_canceled']
+    df_final['adr'] = df_final['adr'].fillna(0).astype(float)
+
     for col in int_columns:
         if col in df_final.columns:
             df_final[col] = df_final[col].fillna(0).astype(int)
