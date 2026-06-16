@@ -1,4 +1,4 @@
-# 🎨 05. 화면 설계서 (UI/UX Design Specification)
+# 🎨 06. 화면 설계서 (UI/UX Design Specification)
 
 본 문서는 Flask 기반 호텔 예약 취소 확률 예측 시스템의 주요 화면 구성 및 프론트엔드-백엔드 간의 인터랙션 로직을 정의한 화면 설계서입니다. **Jinja2 컴포넌트 분리 구조**와 **Fetch API 기반 비동기 처리**를 핵심 인터랙션 지표로 삼고 있습니다.
 

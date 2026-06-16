@@ -1,3 +1,5 @@
+# 🗺️ 08. ER 다이어그램 명세서 (Mermaid)
+
 erDiagram
     %% 1. AI 학습용 원본 데이터 테이블
     BOOKINGS {

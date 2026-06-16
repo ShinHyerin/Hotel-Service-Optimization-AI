@@ -1,4 +1,4 @@
-# 🗺️ UML 다이어그램 명세서 (Mermaid)
+# 🗺️ 07. UML 다이어그램 명세서 (Mermaid)
 
 ## 1. Use Case Diagram (유스케이스 다이어그램)
 시스템의 사용자(Actor)와 제공되는 핵심 기능(Use Case) 간의 관계를 정의합니다.

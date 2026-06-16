@@ -1,4 +1,4 @@
-# 🛠️ 02. 사용 기술 및 경험 (Tech Stack & Experiences)
+# 🛠️ 03. 사용 기술 및 경험 (Tech Stack & Experiences)
 
 본 통합 솔루션을 구현하기 위해 활용한 기술 스택과 각 프로젝트별 핵심 기술 경험(Deep Dive) 정리입니다.
 

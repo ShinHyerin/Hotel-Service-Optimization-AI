@@ -1,4 +1,4 @@
-# 📋 04. 요구사항 정의서 (Requirements Specification)
+# 📋 05. 요구사항 정의서 (Requirements Specification)
 
 본 통합 솔루션이 제공하는 3가지 핵심 모듈(ML/Flask, YOLOv11, SLM 챗봇)의 기능적 요구사항과 품질 및 인프라적 제약조건을 정의한 명세서입니다.
 
