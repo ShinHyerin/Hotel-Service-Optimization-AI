@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // app.py의 /search_booking 코드가 JSON 데이터를 반환하도록 고치기 전에,
             // 기존 라우트 주소로 비동기 요청을 전송합니다.
-            fetch('/search_booking', {
+            fetch('/api/bookings/search', {
                 method: 'POST',
                 body: formData
             })
@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (!result) return;
 
-                fetch(`/cancel_booking/${bookingId}`, {
+                fetch(`/api/bookings/${bookingId}/cancel`, {
                     method: 'POST'
                 })
                 .then(response => response.json())

@@ -200,7 +200,8 @@ def reserve():
 # ==========================================
 # 5. [수정 완료] 예약 이력 및 현황 조회 (JSON 반환 구조 통합)
 # ==========================================
-@app.route('/search_booking', methods=['POST'])
+# @app.route('/search_booking', methods=['POST'])
+@app.route('/api/bookings/search', methods=['POST'])
 def search_booking():
     try:
         customer_name = request.form.get('customer_name')
@@ -269,7 +270,8 @@ def search_booking():
 # ==========================================
 # 6. 예약 취소 시스템 단독 펑션
 # ==========================================
-@app.route('/cancel_booking/<int:booking_id>', methods=['POST'])
+# @app.route('/cancel_booking/<int:booking_id>', methods=['POST'])
+@app.route('/api/bookings/<int:booking_id>/cancel', methods=['POST'])
 def cancel_booking(booking_id):
 
     conn = get_oracle_connection()
