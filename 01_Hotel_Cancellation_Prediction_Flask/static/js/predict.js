@@ -195,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ==========================================
-// [초기화] 🏨 객실 및 🏢 세미나실 듀얼 차트 셋팅
+// [초기화] 듀얼 차트 셋팅
 // ==========================================
 function initDualCharts() {
     const chartOptions = {
@@ -208,7 +208,7 @@ function initDualCharts() {
         }
     };
 
-    // 🏨 객실 예약 취소율 차트 초기화
+    // 🏨 휴양형 호텔 예약 취소율 차트 초기화
     const ctxResort = document.getElementById('resortChart').getContext('2d');
     resortChart = new Chart(ctxResort, {
         type: 'doughnut',
@@ -223,7 +223,7 @@ function initDualCharts() {
         options: chartOptions
     });
 
-    // 🏢 세미나실 취소율 차트 초기화
+    // 🏢 도심형 호텔 취소율 차트 초기화
     const ctxCity = document.getElementById('cityChart').getContext('2d');
     cityChart = new Chart(ctxCity, {
         type: 'doughnut',
