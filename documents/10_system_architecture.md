@@ -10,7 +10,7 @@ graph LR
     end
 
     subgraph Server [백엔드 - Python Flask]
-        Route[@app.route] <--> Controller[API 컨트롤러 로직]
+        Route[app.route] <--> Controller[API 컨트롤러 로직]
         Controller <--> ModelLoader[joblib / ML 모델 로드]
     end
 
@@ -23,6 +23,38 @@ graph LR
     end
 
     %% 데이터 흐름 연결
+    JS <-->|비동기 JSON 통신| Route
+    Controller <-->|정형 데이터 적재/조회| Oracle
+```
+```
+graph LR
+
+    subgraph Client
+        UI["HTML / CSS"] <--> JS["JavaScript / Fetch API"]
+        JS --> Chart["Chart.js / 실시간 시각화"]
+    end
+
+    subgraph Server
+        Route["Flask Route"]
+        Controller["API 컨트롤러 로직"]
+        ModelLoader["joblib / ML 모델 로드"]
+
+        Route <--> Controller
+        Controller <--> ModelLoader
+    end
+
+    subgraph AI
+        ML["Scikit-learn Model"]
+        ModelLoader <--> ML
+    end
+
+    subgraph DB
+        Oracle[(Oracle 11g)]
+        Seq["Sequence / Trigger"]
+
+        Oracle <--> Seq
+    end
+
     JS <-->|비동기 JSON 통신| Route
     Controller <-->|정형 데이터 적재/조회| Oracle
 ```

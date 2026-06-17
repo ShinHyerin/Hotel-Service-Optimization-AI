@@ -35,6 +35,43 @@ graph LR
 
     Staff --> S1
 ```
+```mermaid
+graph LR
+    %% Actors
+    Customer[일반 고객]
+    Manager[공간 관리자]
+    Staff[호텔 직원 / 투숙객]
+
+    %% System Boundary
+    subgraph Smart_Hospitality_Platform [스마트 호스피탈리티 플랫폼]
+        
+        %% Flask ML Module (가로 정렬 구조)
+        subgraph Flask_ML [Flask ML Module]
+            F1((실시간 취소 확률 조회)) --- F2((예약 정보 저장)) --- F3((예약 내역 검색 및 취소))
+        end
+
+        %% YOLOv11 CV Module (가로 정렬 구조)
+        subgraph YOLO_CV [YOLOv11 CV Module]
+            Y1((실시간 공간 모니터링)) --- Y2((노쇼 / 자리비움 판별))
+        end
+
+        %% Hugging Face SLM Module
+        subgraph HF_SLM [Hugging Face SLM Module]
+            S1((사내 규정 및 매뉴얼 QnA))
+        end
+
+    end
+
+    %% Relationships
+    Customer --> F1
+    Customer --> F2
+    Customer --> F3
+
+    Manager --> Y1
+    Manager --> Y2
+
+    Staff --> S1
+```
 
 ## 2. Sequence Diagram (시퀀스 다이어그램)
 프론트엔드의 비동기 Fetch API 요청부터 AI 모델 추론, Oracle DB 적재까지의 동적 흐름을 명시합니다.
