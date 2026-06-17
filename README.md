@@ -16,13 +16,11 @@
 - **목적:** 고객 데이터를 기반으로 실시간 예약 취소 가능성을 예측하여 노쇼 손실을 사전 방지합니다.
 - **주요 기능:** 대시보드를 통한 취소 확률 시각화 및 머신러닝 Inference 웹 UI 제공
 - **기술 스택:** Python, Flask, Scikit-learn, Pandas, HTML/CSS
-- **상세 보기:** [👉 프로젝트 1 상세 README 바로가기](./01_Hotel_Cancellation_Prediction_Flask/README.md)
 
 ### 2. 🪑 세미나실/공유오피스 실시간 노쇼 감지 시스템 (`/02_Office_Noshow_Detection_YOLOv11`)
 - **목적:** 최신 객체 탐지 모델을 활용하여 예약된 공유 공간 내 사람의 유무를 실시간으로 판별하고 노쇼를 감지합니다.
 - **주요 기능:** CCTV/카메라 피드를 통한 공간 내 인원 탐지, 예약 시간 대조 후 빈 방 전환 알림 트리거
 - **기술 스택:** Python, PyTorch, YOLOv11, Roboflow, OpenCV
-- **상세 보기:** [👉 프로젝트 2 상세 README 바로가기](./02_Office_Noshow_Detection_YOLOv11/README.md)
 
 ### 3. 💬 [Up-coming] 공간 이용 안내 및 고객 응대 시스템 (`/03_Space_Assistant_SLM`)
 - **목적:** 이용객의 편의를 돕고 예약을 유연하게 관리하기 위한 경량화 언어 모델(SLM) 기반의 맞춤형 상담 서비스입니다.
